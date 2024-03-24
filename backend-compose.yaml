@@ -9,7 +9,7 @@ services:
       - ./environment.env
     volumes:
       - type: bind
-        source: ./resources/images #/home/twg/resources/images
+        source: ../twg-backend/resources/images #/home/twg/resources/images
         target: /home/twg/images
     ports:
       - "1337:1337"
