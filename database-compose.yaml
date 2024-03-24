@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:alpine
     env_file:
-      - ../environment.env
+      - ./environment.env
     volumes:
       - type: bind
         source: ../postgresql/data #/home/twg/postgresql/data
@@ -18,7 +18,7 @@ services:
     image: redis:latest
     command: "redis-server /usr/local/etc/redis/redis.conf"
     env_file:
-      - ../environment.env
+      - ./environment.env
     volumes:
       - type: bind
         source: ../redis #/home/twg/redis

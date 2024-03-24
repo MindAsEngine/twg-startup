@@ -17,12 +17,14 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana:/var/lib/grafana
+      - ../grafana:/var/lib/grafana
     env_file:
-      - ../environment.env
+      - ./environment.env
     networks:
       - backend
       - monitoring
+    restart: always
+
 
 
   prometheus:
@@ -37,6 +39,9 @@ services:
     networks:
       - backend
       - monitoring
+    restart: always
+
+
 
 networks:
   backend:

@@ -4,9 +4,9 @@ services:
   backend:
     image: twg-backend
     build:
-      context: ../
+      context: ../twg-backend
     env_file:
-      - ../environment.env
+      - ./environment.env
     volumes:
       - type: bind
         source: ../resources/images #/home/twg/resources/images
@@ -16,6 +16,7 @@ services:
     networks:
       - backend
       - database
+    restart: always
 
 networks:
   backend:
