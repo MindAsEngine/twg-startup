@@ -1,0 +1,114 @@
+version: '3.8'
+include:
+  - database-compose.yaml
+  - backend-compose.yaml
+  - monitoring-compose.yaml
+  - frontend-compose.yaml
+name: twg_agency
+services:
+
+  twg_postgres:
+    extends:
+      file: ./database-compose.yaml
+      service: postgres
+    image: postgres:alpine
+    ports:
+        - "5435:5432"
+    networks:
+      - database
+
+  twg_redis:
+    extends:
+      file: ./database-compose.yaml
+      service: redis
+    image: redis:latest
+    command: "redis-server /usr/local/etc/redis/redis.conf"
+    ports:
+      - "6379:6379"
+    networks:
+      - database
+
+
+  twg_backend:
+    extends:
+      file: ./backend-compose.yaml
+      service: backend
+    depends_on:
+      - postgres
+      - redis
+    image: twg-backend
+    build:
+      context: ../twg-backend
+    ports:
+      - "1337:1337"
+    networks:
+      - database
+      - backend
+
+
+  twg_frontend:
+    extends:
+      file: ./frontend-compose.yaml
+      service: frontend
+    image: twg-frontend
+    build:
+      context: ../twg-frontend
+    ports:
+      - "80:3000"
+      - "443:3000"
+    networks:
+      - frontend
+      - backend
+
+#  twg_elk:
+#    networks:
+#      - backend
+#      - monitoring
+#    extends:
+#      file: ./monitoring-compose.yaml
+#      service: elk
+
+  twg_grafana:
+    extends:
+      file: ./monitoring-compose.yaml
+      service: grafana
+    depends_on:
+      - backend
+    build:
+      context: config/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+      - monitoring
+
+
+  twg_prometheus:
+#    networks:
+#      - backend
+#      - monitoring
+    extends:
+      file: ./monitoring-compose.yaml
+      service: prometheus
+    depends_on:
+      - backend
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - backend
+      - monitoring
+
+networks:
+    database:
+      name: database_network
+      external: true
+    backend:
+      name: backend_network
+      external: true
+    monitoring:
+      name: monitoring_network
+      external: true
+    frontend:
+      name: frontend_network
+      external: true
