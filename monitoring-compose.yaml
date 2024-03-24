@@ -1,19 +1,18 @@
 version: '3.8'
 name: twg_agency_monitoring
 services:
-  elk:
-    container_name: TWG_agency_elastic
-    image: sebp/elk
-    ports:
-      - "5601:5601" #kibana
-      - "9200:9200" #elastic
-      - "5044:5044" #logstash
-    networks:
-      - backend
-      - monitoring
+#  elk:
+#    container_name: TWG_agency_elastic
+#    image: sebp/elk
+#    ports:
+#      - "5601:5601" #kibana
+#      - "9200:9200" #elastic
+#      - "5044:5044" #logstash
+#    networks:
+#      - backend
+#      - monitoring
 
   grafana:
-    container_name: TWG_agency_grafana
     build: './config/grafana'
     ports:
       - "3000:3000"
@@ -27,7 +26,6 @@ services:
 
 
   prometheus:
-    container_name: TWG_agency_prometheus
     image: prom/prometheus
     ports:
       - "9090:9090"
@@ -39,7 +37,7 @@ services:
     networks:
       - backend
       - monitoring
-  
+
 networks:
   backend:
     name: backend_network

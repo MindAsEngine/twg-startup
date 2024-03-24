@@ -2,7 +2,6 @@ version: '3.8'
 name: twg_agency_databases
 services:
   postgres:
-    container_name: TWG_agency_postgres
     image: postgres:alpine
     env_file:
       - ../environment.env
@@ -16,7 +15,6 @@ services:
       - database
 
   redis:
-    container_name: TWG_agency_redis
     image: redis:latest
     command: "redis-server /usr/local/etc/redis/redis.conf"
     env_file:
