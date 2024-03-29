@@ -12,7 +12,7 @@ services:
         source: ../twg-backend/resources/images #/home/twg/resources/images
         target: /home/twg/images
     ports:
-      - '8881:8080'
+      - '8080:8080'
     networks:
       - backend
       - database
