@@ -9,6 +9,9 @@ services:
       - type: bind
         source: ../postgresql/data #/home/twg/postgresql/data
         target: /var/lib/postgresql/data
+      - type: bind
+        source: ../postgresql/backups #/home/twg/postgresql/data
+        target: /home/backups
     ports:
       - "5435:5432"
     networks:
