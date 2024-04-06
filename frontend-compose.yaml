@@ -8,9 +8,7 @@ services:
     env_file:
       - ./environment.env
     volumes:
-      - type: bind
-        source: ../resources/images #/home/twg/frontend/resources/images
-        target: /home/twg/images #change if needed
+      - ../resources/images:/home/twg/images
     ports:
       - "80:3000"
       - "443:3000"

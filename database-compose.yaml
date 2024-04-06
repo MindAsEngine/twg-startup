@@ -6,12 +6,8 @@ services:
     env_file:
       - ./environment.env
     volumes:
-      - type: bind
-        source: ../postgresql/data #/home/twg/postgresql/data
-        target: /var/lib/postgresql/data
-      - type: bind
-        source: ../postgresql/backups #/home/twg/postgresql/data
-        target: /home/backups
+      - ../postgresql/backups:/home/backups
+      - ../postgresql/data:/var/lib/postgresql/data
     ports:
       - "5435:5432"
     networks:
@@ -23,12 +19,8 @@ services:
     env_file:
       - ./environment.env
     volumes:
-      - type: bind
-        source: ../redis #/home/twg/redis
-        target: /var/lib/redis
-      - type: bind
-        source: ../redis.conf #/home/twg/redis.conf
-        target: /usr/local/etc/redis/redis.conf
+      - ../redis.conf:/usr/local/etc/redis/redis.conf
+      - ../redis:/var/lib/redis
     ports:
       - "6379:6379"
     networks:

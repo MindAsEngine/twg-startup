@@ -1,0 +1,8 @@
+#!/bin/sh
+docker compose -f ../backend-compose.yaml down
+cd ../../twg-backend
+git pull origin
+cd ../twg-startup/linx
+docker rmi twg-backend
+docker compose -f ../backend-compose.yaml up -d
+
