@@ -8,9 +8,11 @@ services:
     env_file:
       - ./environment.env
     volumes:
-      - type: bind
-        source: ../twg-backend/resources/images #/home/twg/resources/images
-        target: /home/twg/images
+      #      - type: bind
+      #        source: ../twg-backend/resources/images #/home/twg/resources/images
+      #        target: /home/twg/images
+      - ../twg-backend/resources/images:/home/twg/images
+      - ../twg-backend/log:/home/twg/log
     ports:
       - '8080:8080'
     networks:
