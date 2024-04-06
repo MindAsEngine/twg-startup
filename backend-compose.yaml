@@ -5,6 +5,12 @@ services:
     image: twg-backend
     build:
       context: ../twg-backend
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 1m
     env_file:
       - ./environment.env
     volumes:
