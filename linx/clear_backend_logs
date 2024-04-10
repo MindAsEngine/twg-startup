@@ -1,0 +1,5 @@
+#!/bin/sh
+echo 'Run logs cleanup'
+find /home/twg/twg-backend/log/ -name ".*gz" -mtime +7 -exec rm {} \;
+echo 'Finish logs cleanup'
+
