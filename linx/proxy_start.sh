@@ -1,0 +1,1 @@
+docker compose -f ../proxy-compose.yaml up

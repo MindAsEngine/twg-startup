@@ -1,9 +1,7 @@
 version: '3.8'
 services:
-  nginx:
-    image: twg-proxy
-    build:
-      context: ../docker-nginx-auto-ssl
+  twg-proxy:
+    image: valian/docker-nginx-auto-ssl
     restart: on-failure
     ports:
       - '80:80'
