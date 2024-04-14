@@ -1,25 +1,33 @@
 version: '3.8'
 services:
   nginx:
-    image: valian/docker-nginx-auto-ssl
+    image: twg-proxy
+    build:
+      context: ../docker-nginx-auto-ssl
     restart: on-failure
     ports:
-      - 80:80
-      - 443:443
+      - '80:80'
+      - '443:443'
     volumes:
       - ssl_data:/etc/resty-auto-ssl
     env_file:
       - ./environment.env
   
     networks:
+      - proxy
       - frontend
       - backend
 
+
 networks:
-  backend:
-    name: backend_network
+  proxy:
+    name: proxy_network
   frontend:
     name: frontend_network
+    external: true
+  backend:
+    name: backend_network
+    external: true
 
 volumes:
   ssl_data:

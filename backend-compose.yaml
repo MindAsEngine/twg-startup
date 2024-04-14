@@ -1,7 +1,7 @@
 version: '3.8'
 name: twg_agency_backend
 services:
-  backend:
+  twg-backend:
     image: twg-backend
     build:
       context: ../twg-backend
