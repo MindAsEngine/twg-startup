@@ -13,9 +13,10 @@ services:
 #      - monitoring
 
   grafana:
-    build: './config/grafana'
+    build:
+      context: ./config/grafana
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - ../grafana:/var/lib/grafana
     env_file:
@@ -33,7 +34,7 @@ services:
       - "9090:9090"
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus:/prometheus
+      - ../prometheus:/prometheus
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
