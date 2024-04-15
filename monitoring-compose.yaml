@@ -12,13 +12,14 @@ services:
 #      - backend
 #      - monitoring
 
-  grafana:
+  twg-grafana:
+    image: twg-grafana
     build:
       context: ./config/grafana
     ports:
       - "3001:3000"
     volumes:
-      - ../grafana:/var/lib/grafana
+      - ./grafana:/var/lib/grafana
     env_file:
       - ./environment.env
     networks:
@@ -28,13 +29,13 @@ services:
 
 
 
-  prometheus:
+  twg-prometheus:
     image: prom/prometheus
     ports:
       - "9090:9090"
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ../prometheus:/prometheus
+      - ./prometheus:/prometheus
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
@@ -45,8 +46,8 @@ services:
 
 
 networks:
+  monitoring:
+    name: monitoring_network
   backend:
     name: backend_network
     external: true
-  monitoring:
-    name: monitoring_network
