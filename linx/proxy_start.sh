@@ -1,1 +1,1 @@
-docker compose -f ../proxy-compose.yaml up
+docker compose -f ../proxy-compose.yaml up -d

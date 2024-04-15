@@ -1,1 +1,1 @@
-docker compose -f ../backend-compose.yaml  up
+docker compose -f ../backend-compose.yaml up -d
