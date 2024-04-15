@@ -15,6 +15,7 @@ services:
       - proxy
       - frontend
       - backend
+      # - monitoring
 
 
 networks:
@@ -26,6 +27,9 @@ networks:
   backend:
     name: backend_network
     external: true
+  # monitoring:
+  #   name: monitoring_network
+  #   external: true
 
 volumes:
   ssl_data:
